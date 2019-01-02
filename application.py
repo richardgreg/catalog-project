@@ -6,12 +6,36 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/categories')
 def showCategory():
-    return ('categories here!!!')
+    return ('All categories here!!!')
 
 
-@app.route('/<int:category_id>/')
-def showCategoryItems():
+@app.route('/category/<int:category_id>/')
+@app.route('/category/<int:category_id>/item')
+def showCategoryItems(category_id):
     return ('show items here!!!')
+
+
+@app.route('/category/<int:category_id>/item/new',
+           methods=['GET', 'POST'])
+def newCategoryItem(category_id):
+    return('new item here!!!')
+
+
+@app.route('/category/<int:category_id>/item/<int:category_item_id>')
+def categoryItemDescription(category_id, category_item_id):
+    return('Description of item here!!!')
+
+
+@app.route('/category/<int:category_id>/item/<int:category_item_id>/edit',
+           methods=['GET', 'POST'])
+def editCategoryItem(category_id, category_item_id):
+    return('Delete item here!!!')
+
+
+@app.route('/category/<int:category_id>/item/<int:category_item_id>/delete',
+           methods=['GET', 'POST'])
+def deleteCategoryItem(category_id, category_item_id):
+    return('Delete item here!!!')
 
 
 if __name__ == '__main__':
