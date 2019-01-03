@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Item</title>
+</head>
+<body>
+    <h1>Edit Item</h1>
+    <form action="#" method="POST">
+        <p>Title</p>
+        <input type="text" name="title">
+
+        <p>Description</p>
+        <input type="text" name="description">
+
+        <p>Category</p>
+        <select>
+            <option value="#">Adventure</option>
+            <option value="#">Drama</option>
+            <option value="#">Dystopia</option>
+            <option value="#">Fantasy</option>
+            <option value="#">Horror</option>
+            <option value="#">Mystery</option>
+            <option value="#">Mythology</option>
+            <option value="#">Non-Fiction</option>
+            <option value="#">Romance</option>
+            <option value="#">Satire</option>
+            <option value="#">Science Fiction</option>
+            <option value="#">Tragedy</option>
+        </select>
+        <br><br>
+        <button>Submit</button>
+    </form>
+    <a href="{{url_for('showCategoryItems', category_id=3)}}">Cancel</a>
+</body>
+</html>

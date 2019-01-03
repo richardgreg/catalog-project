@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Catalog</title>
+</head>
+<body>
+    {% for i in res %}
+        <p>{{i['name']}}</p>
+        <a href="{{url_for('showCategoryItems', category_id=i['id'])}}">View items in this category</a>
+        <br>
+        <a href="{{url_for('newCategoryItem', category_id=i['id'])}}">Add a new item to this category</a>
+    {% endfor %}
+</body>
+</html>
