@@ -4,11 +4,12 @@
     <title>Catalog</title>
 </head>
 <body>
-    {% for i in res %}
-        <p>{{i['name']}}</p>
-        <a href="{{url_for('showCategoryItems', category_id=i['id'])}}">View items in this category</a>
+    <h2>Here are a list of <em>classical book</em> genres:</h2>
+    {% for i in cat %}
+        <h3>{{i.name}}</h3>
+        <a href="{{url_for('showCategoryItems', category_id=i['id'])}}">View books in this category</a>
         <br>
-        <a href="{{url_for('newCategoryItem', category_id=i['id'])}}">Add a new item to this category</a>
+        <a href="{{url_for('newCategoryItem', category_id=i['id'])}}">Add a new book to this category</a>
     {% endfor %}
 </body>
 </html>

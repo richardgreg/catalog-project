@@ -1,6 +1,16 @@
+#!/usr/bin/env python3
 from flask import Flask, render_template, url_for
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
+from database_setup import User, Category, CategoryItem, Base
 app = Flask(__name__)
+engine = create_engine('sqlite:///bookcatalog.db')
+Base.metadata.bind = engine
+
+DBSession = sessionmaker(bind=engine)
+
+session = DBSession()
 
 # Fake Restaurants
 restaurant = {'name': 'The CRUDdy Crab', 'id': '1'}
@@ -30,7 +40,8 @@ item =  {'name':'Cheese Pizza','description':'made with fresh cheese',
 @app.route('/')
 @app.route('/categories')
 def showCategories():
-    return render_template ('categories.html', res=restaurants)
+    categories = session.query(Category).all()
+    return render_template ('categories.html', cat=categories)
 
 
 @app.route('/category/<int:category_id>/')

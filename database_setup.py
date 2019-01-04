@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import sys
 from sqlalchemy import Column, ForeignKey, Integer, String
@@ -24,7 +25,7 @@ class Category(Base):
     name = Column(String(250), nullable=False)
 
 
-class CategoryItem(object):
+class CategoryItem(Base):
     __tablename__ = 'category_item'
 
     id = Column(Integer, primary_key=True)
