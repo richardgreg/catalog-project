@@ -47,3 +47,7 @@ class CategoryItem(object):
             'author': self.author,
             'category': self.category,
         }
+
+
+engine = create_engine('sqlite:///bookcatalog.db')
+Base.metadata.create_all(engine)
