@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Item</title>
+    <title>Add New Item</title>
 </head>
 <body>
-    <h1>Edit Item</h1>
+    <h1>Add New Item</h1>
     <form action="#" method="POST">
-        <p>Title</p>
-        <input type="text" name="title">
+        <label for="title">Title:</label>
+        <input id='title' type="text" name="title">
 
-        <p>About the book</p>
-        <input type="text" name="description">
+        <p>About the Book:</p>
+        <label for="description"></label>
+        <textarea cols="30" rows="5" id="description" name="description"></textarea><br>
 
-        <p>Author</p>
-        <input type="text" name="author">
+        <label for="author">Book Author:</label>
+        <input id="author" type="text" name="author"><br><br>
 
-        <p>Category</p>
-        <select>
-            <option value="#">Adventure</option>
-            <option value="#">Drama</option>
-            <option value="#">Dystopia</option>
-            <option value="#">Fantasy</option>
-            <option value="#">Horror</option>
-            <option value="#">Mystery</option>
-            <option value="#">Mythology</option>
-            <option value="#">Non-Fiction</option>
-            <option value="#">Romance</option>
-            <option value="#">Satire</option>
-            <option value="#">Science Fiction</option>
-            <option value="#">Tragedy</option>
+        <label for="select-category">Book Category:</label>
+        <select id="select-category">
+            <option value="Adventure">Adventure</option>
+            <option value="Drama">Drama</option>
+            <option value="Dystopia">Dystopia</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Horror">Horror</option>
+            <option value="Mystery">Mystery</option>
+            <option value="Mythology">Mythology</option>
+            <option value="Non-Fiction">Non-Fiction</option>
+            <option value="Romance">Romance</option>
+            <option value="Satire">Satire</option>
+            <option value="Science Fiction">Science Fiction</option>
+            <option value="Tragedy">Tragedy</option>
         </select>
         <br><br>
         <button>Submit</button>
     </form>
-    <a href="{{url_for('showCategoryItems', category_id=3)}}">Cancel</a>
+    <br>
+    <a href="{{url_for('showCategories')}}">Back to Item display</a>
 </body>
 </html>

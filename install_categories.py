@@ -71,3 +71,5 @@ category12 = Category(name='Tragedy')
 
 session.add(category12)
 session.commit()
+
+print("Book categories have been successfully installed")

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, redirect, request
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -47,13 +47,25 @@ def showCategories():
 @app.route('/category/<int:category_id>/')
 @app.route('/category/<int:category_id>/item')
 def showCategoryItems(category_id):
-    return render_template ('categoryitem.html', items=items, category_id=category_id)
+    category = session.query(Category).filter_by(id=category_id).one()
+    category_items = session.query(CategoryItem).filter_by(category_id=category_id)
+    return render_template ('categoryitem.html', items=category_items,
+                            category_id=category_id, category=category)
 
 
 @app.route('/category/<int:category_id>/item/new',
            methods=['GET', 'POST'])
 def newCategoryItem(category_id):
-    return render_template ('newcategoryitem.html', category_id=category_id)
+    if request.method == 'POST':
+        new_category_item = CategoryItem(title=request.form['title'],
+                                        description=request.form['description'],
+                                        author=request.form['author'],
+                                        category_id=category_id)
+        session.add(new_category_item)
+        session.commit()
+        return redirect(url_for('showCategories', category_id=category_id))
+    else:
+        return render_template ('newcategoryitem.html', category_id=category_id)
 
 
 @app.route('/category/<int:category_id>/item/<int:category_item_id>')

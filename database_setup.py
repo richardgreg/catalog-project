@@ -22,19 +22,19 @@ class Category(Base):
     __tablename__ = 'category'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
+    name = Column(String(80), nullable=False)
 
 
 class CategoryItem(Base):
     __tablename__ = 'category_item'
 
     id = Column(Integer, primary_key=True)
-    title = Column(String(250), nullable=False)
-    author = Column(String(250), nullable=False)
+    title = Column(String(100), nullable=False)
+    author = Column(String(80), nullable=False)
     description = Column(String(250))
-    category = Column(String(250))
-    user_id = Column(Integer, ForeignKey('user.id'))
     category_id = Column(Integer, ForeignKey('category.id'))
+    category = relationship(Category)
+    user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
 
     @property
@@ -45,8 +45,7 @@ class CategoryItem(Base):
             'id': self.id,
             'title': self.title,
             'description': self.description,
-            'author': self.author,
-            'category': self.category,
+            'author': self.author
         }
 
 
