@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 
 from database_setup import User, Category, CategoryItem, Base
 app = Flask(__name__)
-engine = create_engine('sqlite:///bookcatalog.db')
+engine = create_engine('sqlite:///bookcatalog.db?check_same_thread=False')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
@@ -70,8 +70,11 @@ def newCategoryItem(category_id):
 
 @app.route('/category/<int:category_id>/item/<int:category_item_id>')
 def categoryItemDescription(category_id, category_item_id):
+    category = session.query(Category).filter_by(id=category_id).one()
+    category_item = session.query(CategoryItem).filter_by(category_id=category_id).filter_by(id=category_item_id)
     return render_template ('categoryiteminfo.html', category_id=category_id,
-                            category_item_id=category_item_id)
+                            category_item_id=category_item_id, cat_item=category_item,
+                            category=category)
 
 
 @app.route('/category/<int:category_id>/item/<int:category_item_id>/edit',
