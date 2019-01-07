@@ -4,8 +4,8 @@
     <title>Delete Item</title>
 </head>
 <body>
-    <h1>Are you sure you want to delete item?</h1>
-    <form action="#" method="POST">
+    <h1>Are you sure you want to delete the book with name - <em>{{item.title}}</em>, and author - <em>{{item.author}}?</em></h1>
+    <form action="{{url_for('deleteCategoryItem', category_id=category_id, category_item_id=item.id)}}" method="POST">
         <button>Delete</button>
     </form>
 </body>
