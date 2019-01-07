@@ -61,8 +61,23 @@ def categoryItemDescription(category_id, category_item_id):
 @app.route('/category/<int:category_id>/item/<int:category_item_id>/edit',
            methods=['GET', 'POST'])
 def editCategoryItem(category_id, category_item_id):
-    return render_template('editcategoryitem.html', category_id=category_id,
-                           category_item_id=category_item_id)
+    i = session.query(CategoryItem).filter_by(id=category_item_id).one()
+    item_to_edit = i
+    if request.method == 'POST':
+        if request.form['title']:
+            item_to_edit.title = request.form['title']
+        if request.form['description']:
+            item_to_edit.description = request.form['description']
+        if request.form['author']:
+            item_to_edit.author = request.form['author']
+        session.add(item_to_edit)
+        session.commit()
+        return redirect(url_for('showCategoryItems', category_id=category_id))
+    else:
+        return render_template('editcategoryitem.html',
+                               category_id=category_id,
+                               category_item_id=category_item_id,
+                               item=item_to_edit)
 
 
 @app.route('/category/<int:category_id>/item/<int:category_item_id>/delete',

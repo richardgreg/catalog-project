@@ -4,37 +4,20 @@
     <title>Add New Item</title>
 </head>
 <body>
-    <h1>Add New Item</h1>
-    <form action="#" method="POST">
+    <h1>Edit Item</h1>
+    <form action="{{url_for('editCategoryItem', category_id=category_id, category_item_id=item.id)}}" method="POST">
         <label for="title">Title:</label>
-        <input id='title' type="text" name="title">
+        <input id='title' type="text" name="title" value="{{item.title}}">
 
         <p>About the Book:</p>
         <label for="description"></label>
-        <textarea cols="30" rows="5" id="description" name="description"></textarea><br>
+        <textarea cols="30" rows="5" id="description" name="description">{{item.description}}</textarea><br><br>
 
         <label for="author">Book Author:</label>
-        <input id="author" type="text" name="author"><br><br>
-
-        <label for="select-category">Book Category:</label>
-        <select id="select-category">
-            <option value="Adventure">Adventure</option>
-            <option value="Drama">Drama</option>
-            <option value="Dystopia">Dystopia</option>
-            <option value="Fantasy">Fantasy</option>
-            <option value="Horror">Horror</option>
-            <option value="Mystery">Mystery</option>
-            <option value="Mythology">Mythology</option>
-            <option value="Non-Fiction">Non-Fiction</option>
-            <option value="Romance">Romance</option>
-            <option value="Satire">Satire</option>
-            <option value="Science Fiction">Science Fiction</option>
-            <option value="Tragedy">Tragedy</option>
-        </select>
-        <br><br>
+        <input id="author" type="text" name="author" value="{{item.author}}"><br><br>
         <button>Submit</button>
     </form>
     <br>
-    <a href="{{url_for('showCategories')}}">Back to Item display</a>
+    <a href="{{url_for('showCategoryItems', category_id=category_id)}}">Back to Item display</a>
 </body>
 </html>
