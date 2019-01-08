@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request, jsonify
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -11,6 +11,14 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 
 session = DBSession()
+
+
+@app.route('/category/<int:category_id>/item/JSON')
+def categoryItemJSON(category_id):
+    category = session.query(Category).filter_by(id=category_id).one()
+    x = session.query(CategoryItem).filter_by(category_id=category_id)
+    items = x
+    return jsonify(CategoryItems=[i.serialize for i in items])
 
 
 @app.route('/')

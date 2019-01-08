@@ -40,8 +40,7 @@ class CategoryItem(Base):
     @property
     def serialize(self):
         """Return object data in easily serializeable format"""
-        return
-        {
+        return {
             'id': self.id,
             'title': self.title,
             'description': self.description,
