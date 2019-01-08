@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-from flask import Flask, render_template, url_for, redirect, request, jsonify
+from flask import (Flask, render_template, url_for,
+                   redirect, request, jsonify, flash)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -48,6 +49,7 @@ def newCategoryItem(category_id):
                                 category_id=category_id)
         session.add(new_item)
         session.commit()
+        flash("New catalog item successfully addded!")
         return redirect(url_for('showCategories', category_id=category_id))
     else:
         return render_template('newcategoryitem.html',
@@ -80,6 +82,7 @@ def editCategoryItem(category_id, category_item_id):
             item_to_edit.author = request.form['author']
         session.add(item_to_edit)
         session.commit()
+        flash("Catalog item successfully edited!")
         return redirect(url_for('showCategoryItems', category_id=category_id))
     else:
         return render_template('editcategoryitem.html',
@@ -96,6 +99,7 @@ def deleteCategoryItem(category_id, category_item_id):
     if request.method == 'POST':
         session.delete(item_to_be_deleted)
         session.commit()
+        flash("Catalog item successfully deleted!")
         return redirect(url_for('showCategoryItems', category_id=category_id))
     else:
         return render_template('deletecategoryitem.html',

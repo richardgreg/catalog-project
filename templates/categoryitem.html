@@ -4,6 +4,15 @@
     <title>Item List</title>
 </head>
 <body>
+    {% with messages = get_flashed_messages() %}
+{% if messages %}
+    <ul>
+    {% for message in messages %}
+        <li><strong>{{ message }}</strong></li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+{% endwith %}
     {% for i in items %}
         <h2>{{i.title}}</h2>
         <h4>{{i.author}}</h4>
