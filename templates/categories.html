@@ -4,7 +4,7 @@
     <title>Catalog</title>
 </head>
 <body>
-    <h2>Here are a list of <em>classical book</em> genres:</h2>
+    <h2>Below are a List of <em>Classical Book</em> Genres:</h2>
     {% for i in cat %}
         <h3>{{i.name}}</h3>
         <a href="{{url_for('showCategoryItems', category_id=i['id'])}}">View books in this category</a>

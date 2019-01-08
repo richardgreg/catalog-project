@@ -4,10 +4,9 @@
     <title>Item description</title>
 </head>
 <body>
-    <h1>Nothing to show here</h1>
     {% for i in cat_item %}
         <p>{{i.description}}</p>
     {% endfor %}
-    <a href="{{url_for('showCategoryItems', category_id=category.id)}}">Back</a>
+    <a href="{{url_for('showCategoryItems', category_id=category.id)}}">Back to List</a>
 </body>
 </html>

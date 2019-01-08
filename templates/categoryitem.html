@@ -7,13 +7,13 @@
     {% for i in items %}
         <h2>{{i.title}}</h2>
         <h4>{{i.author}}</h4>
-        <a href="{{url_for('categoryItemDescription', category_id=category.id, category_item_id=i.id)}}">Item description</a>
+        <a href="{{url_for('categoryItemDescription', category_id=category.id, category_item_id=i.id)}}">Book Description</a>
         <br><br>
-        <a href="{{url_for('editCategoryItem',category_id=category.id, category_item_id=i.id)}}">Edit Item</a>
-        <a href="{{url_for('deleteCategoryItem',category_id=category.id, category_item_id=i.id)}}">Delete Item</a>
+        <a href="{{url_for('editCategoryItem',category_id=category.id, category_item_id=i.id)}}">Edit Book Details</a>
+        <a href="{{url_for('deleteCategoryItem',category_id=category.id, category_item_id=i.id)}}">Delete Book</a>
     {% endfor %}
     <br><br>
-        <a href="{{url_for('showCategories')}}">Back</a>
+        <a href="{{url_for('showCategories')}}">Back to Category List</a>
     
 </body>
 </html>
