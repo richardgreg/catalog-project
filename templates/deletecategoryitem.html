@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Delete Item</title>
-</head>
-<body>
+{% extends "main.html" %}
+{% block content %}
     <h1>Are you sure you want to delete the book with name - <em>{{item.title}}</em>, and author - <em>{{item.author}}?</em></h1>
     <form action="{{url_for('deleteCategoryItem', category_id=category_id, category_item_id=item.id)}}" method="POST">
         <button>Confirm</button>
     </form>
-</body>
-</html>
+{% endblock %}

@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Item List</title>
-</head>
-<body>
+{% extends "main.html" %}
+{% block content %}
+
     {% with messages = get_flashed_messages() %}
 {% if messages %}
     <ul>
@@ -23,6 +20,4 @@
     {% endfor %}
     <br><br>
         <a href="{{url_for('showCategories')}}">Back to Category List</a>
-    
-</body>
-</html>
+{% endblock %}

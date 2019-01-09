@@ -50,7 +50,7 @@ def newCategoryItem(category_id):
         session.add(new_item)
         session.commit()
         flash("New catalog item successfully addded!")
-        return redirect(url_for('showCategories', category_id=category_id))
+        return redirect(url_for('showCategoryItems', category_id=category_id))
     else:
         return render_template('newcategoryitem.html',
                                category_id=category_id)

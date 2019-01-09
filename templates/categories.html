@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Catalog</title>
-</head>
-<body>
+{% extends "main.html" %}
+{% block content %}
     <h2>Below are a List of <em>Classical Book</em> Genres:</h2>
     {% for i in cat %}
         <h3>{{i.name}}</h3>
@@ -11,5 +7,4 @@
         <br>
         <a href="{{url_for('newCategoryItem', category_id=i['id'])}}">Add a new book to this category</a>
     {% endfor %}
-</body>
-</html>
+{% endblock %}
