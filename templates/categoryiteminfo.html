@@ -1,7 +1,17 @@
 {% extends "main.html" %}
 {% block content %}
-    {% for i in cat_item %}
-        <p>{{i.description}}</p>
-    {% endfor %}
-    <a href="{{url_for('showCategoryItems', category_id=category.id)}}">Back to List</a>
+{% include "header.html" %}
+{% for i in cat_item %}
+    <section class="jumbotron text-center mt-5 headJumbotron" >
+        <div>
+            <h1 class="jumbotron-heading">About <em>{{i.title}}:</em></h1>
+        </div>
+        <a href="{{url_for('showCategoryItems', category_id=category.id)}}">Back to List</a>
+    </section>
+    <div class="container">
+        <p class="lead pl-1">{{i.description}}</p> 
+        <hr>
+    <a href="{{url_for('showCategoryItems', category_id=category.id)}}">Back to List</a> 
+    </div>
+{% endfor %}
 {% endblock %}

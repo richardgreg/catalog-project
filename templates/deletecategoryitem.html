@@ -1,7 +1,18 @@
 {% extends "main.html" %}
 {% block content %}
-    <h1>Are you sure you want to delete the book with name - <em>{{item.title}}</em>, and author - <em>{{item.author}}?</em></h1>
-    <form action="{{url_for('deleteCategoryItem', category_id=category_id, category_item_id=item.id)}}" method="POST">
-        <button>Confirm</button>
-    </form>
+{% include "header.html" %}
+    <section class="jumbotron text-center mt-5 headJumbotron" >
+        <div>
+            <h1 class="jumbotron-heading">Are you sure you want to delete the book with name - <em>{{item.title}}</em>, and author - <em>{{item.author}}?</h1>
+        </div>
+        <p class="lead text-muted">Click the big red shiny button below to permanently <em>delete!</em> it</p>
+        <a href="{{url_for('showCategoryItems', category_id=category_id)}}">Back to Book Display</a>
+    </section>
+
+    <div class="bg-light d-flex justify-content-center">
+        <form class="" action="{{url_for('deleteCategoryItem', category_id=category_id, category_item_id=item.id)}}" method="POST">
+            <button class="btn btn-lg btn-danger text-center">Confirm Deletion</button>
+        </form>
+    </div>
+    
 {% endblock %}
