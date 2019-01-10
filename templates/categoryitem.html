@@ -1,5 +1,6 @@
 {% extends "main.html" %}
 {% block content %}
+{% include "header.html" %}
 
     {% with messages = get_flashed_messages() %}
 {% if messages %}
@@ -10,14 +11,29 @@
     </ul>
     {% endif %}
 {% endwith %}
+
     {% for i in items %}
-        <h2>{{i.title}}</h2>
-        <h4>{{i.author}}</h4>
-        <a href="{{url_for('categoryItemDescription', category_id=category.id, category_item_id=i.id)}}">Book Description</a>
-        <br><br>
-        <a href="{{url_for('editCategoryItem',category_id=category.id, category_item_id=i.id)}}">Edit Book Details</a>
-        <a href="{{url_for('deleteCategoryItem',category_id=category.id, category_item_id=i.id)}}">Delete Book</a>
-    {% endfor %}
-    <br><br>
+    <div class="py-3 bg-light">
+        <div class="container">
+            <div class="row">
+            <div class="col-md-4 float">
+                <div class="card mb4">
+                    <h2>{{i.title}}</h2>
+                    <h4>{{i.author}}</h4>
+                    <a href="{{url_for('categoryItemDescription', category_id=category.id, category_item_id=i.id)}}">Book Description</a>
+                    <br>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a class="btn btn-sm btn-outline-warning" href="{{url_for('editCategoryItem',category_id=category.id, category_item_id=i.id)}}">Edit Book Details</a>
+                            <a class="btn btn-sm btn-outline-danger" href="{{url_for('deleteCategoryItem',category_id=category.id, category_item_id=i.id)}}">Delete Book</a>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>   
+        </div>
+        
+    </div>
+    {% endfor %} 
         <a href="{{url_for('showCategories')}}">Back to Category List</a>
 {% endblock %}
