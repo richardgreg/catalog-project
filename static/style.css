@@ -3,7 +3,11 @@
     font-weight: 700;
 }
 
-#categoriesJumbotron {
+/*#flash{
+  margin-right: 20%;
+}*/
+
+.headJumbotron {
     margin-top: 50px;
 }
 
