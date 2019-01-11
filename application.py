@@ -3,15 +3,31 @@ from flask import (Flask, render_template, url_for,
                    redirect, request, jsonify, flash)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-
 from database_setup import User, Category, CategoryItem, Base
+
+# Import for login session
+from flask import session as login_session
+import random, string
+
 app = Flask(__name__)
+
+# Connect to Database and create database session
 engine = create_engine('sqlite:///bookcatalog.db?check_same_thread=False')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
-
 session = DBSession()
+
+
+# Create a state token to prevent request forgery
+# Store it in the session for later validation.
+@app.route('/login')
+def showLogin():
+    state = ''.join(random.choice(string.ascii_uppercase + string.digits)
+                  for x in range(32))
+    login_session['state'] = state
+    # return "The current session state is %s" % login_session['state']
+    return render_template('login.html', STATE=state)
 
 
 @app.route('/category/<int:category_id>/item/JSON')
