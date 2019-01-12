@@ -13,7 +13,11 @@
           <a class="nav-link" href="#">Link</a>
           </li>
           <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
+          {%if 'username' not in session %}
+          <a href="{{url_for('showLogin')}}">Click Here to Login </a>
+          {% else %}
+          <a class="nav-link disabled" href="{{url_for('gdisconnect')}}">Logout</a>
+          {% endif %}
           </li>
         </ul>
       </div>
