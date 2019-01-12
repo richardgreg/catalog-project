@@ -1,22 +1,17 @@
   <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <div class="navbar-brand ml-5" href=""><i class="fas fa-book-reader mr-2"></i>Book-<em>ish</em></div>
+      <a class="navbar-brand ml-5" href="{{url_for('showCategories')}}"><i class="fas fa-book-reader mr-2"></i>Book-<em>ish</em><span class="sr-only">(current)</span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-          <a class="nav-link" href="{{url_for('showCategories')}}">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+        <ul class="navbar-nav ml-auto mr-5">
           </li>
           <li class="nav-item">
           {%if 'username' not in session %}
-          <a href="{{url_for('showLogin')}}">Click Here to Login </a>
+          <a class="nav-link" href="{{url_for('showLogin')}}">Login </a>
           {% else %}
-          <a class="nav-link disabled" href="{{url_for('gdisconnect')}}">Logout</a>
+          <a class="nav-link" href="{{url_for('gdisconnect')}}">Logout</a>
           {% endif %}
           </li>
         </ul>

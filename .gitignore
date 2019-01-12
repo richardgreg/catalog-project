@@ -3,3 +3,5 @@ __pycache__
 bookcatalog.db
 
 client_secrets.json
+
+config.py
