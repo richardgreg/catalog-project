@@ -133,7 +133,7 @@ def gconnect():
     output += login_session['picture']
     output += ' "style = "width: 300px; height: 300px;border-radius: 150px; '
     output += '-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
-    flash("Logged in as %s" % login_session['username'])
+    flash("you are now logged in as %s" % login_session['username'])
     print("done!")
     return output
 
@@ -157,8 +157,7 @@ def getUserID(email):
     try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
-    except exc.SQLAlchemyError, e:
-        print(e)
+    except exc.SQLAlchemyError:
         return None
 
 
@@ -189,10 +188,12 @@ def gdisconnect():
         del login_session['picture']
         response = make_response(json.dumps('Successfully disconnected.'), 200)
         response.headers['Content-Type'] = 'application/json'
-        return response
+        print(response)
+        flash("You have successfully been logged out.")
+        return redirect(url_for('showCategories'))
     else:
         reply = 'Failed to revoke token for given user.'
-        response = make_response(json.dumps(reply, 400))
+        response = make_response(json.dumps(reply), 400)
         response.headers['Content-Type'] = 'application/json'
         return response
 
