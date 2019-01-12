@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
+# Bare app functionality imports
 from flask import (Flask, render_template, url_for,
                    redirect, request, jsonify, flash)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import User, Category, CategoryItem, Base, User
 
-# Import for login session
+# Import for login session and anti-forgery state token
 from flask import session as login_session
 import random
 import string
 
-# IMPORTS FOR THIS STEP
+# Imports for handling google-signin callback method in template
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 import httplib2
@@ -24,13 +25,13 @@ app = Flask(__name__)
 # Connect to Database and create database session
 engine = create_engine('sqlite:///bookcatalog.db?check_same_thread=False')
 Base.metadata.bind = engine
-
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+# Declare google auth client ID by referencing the client secrets file
 CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
-APPLICATION_NAME = "Restaurant Menu Application"
+APPLICATION_NAME = "Book-ish"
 
 
 # Create a state token to prevent request forgery
@@ -198,6 +199,7 @@ def gdisconnect():
         return response
 
 
+# JSON APIs to view Book Information
 @app.route('/category/<int:category_id>/item/JSON')
 def categoryItemJSON(category_id):
     category = session.query(Category).filter_by(id=category_id).one()
@@ -206,6 +208,7 @@ def categoryItemJSON(category_id):
     return jsonify(CategoryItems=[i.serialize for i in items])
 
 
+# Display available categories
 @app.route('/')
 @app.route('/categories/')
 def showCategories():
@@ -213,6 +216,7 @@ def showCategories():
     return render_template('categories.html', cat=categories)
 
 
+# Show all items related to category
 @app.route('/category/<int:category_id>/')
 @app.route('/category/<int:category_id>/item/')
 def showCategoryItems(category_id):
@@ -223,6 +227,7 @@ def showCategoryItems(category_id):
                            category_id=category_id, category=category)
 
 
+# Create a new category item
 @app.route('/category/<int:category_id>/item/new/',
            methods=['GET', 'POST'])
 def newCategoryItem(category_id):
@@ -244,6 +249,7 @@ def newCategoryItem(category_id):
                                category_id=category_id, category=category)
 
 
+# Display more Information about a specific item
 @app.route('/category/<int:category_id>/item/<int:category_item_id>/')
 def categoryItemDescription(category_id, category_item_id):
     category = session.query(Category).filter_by(id=category_id).one()
@@ -256,6 +262,7 @@ def categoryItemDescription(category_id, category_item_id):
                            category=category)
 
 
+# Edit a specific BOOK item
 @app.route('/category/<int:category_id>/item/<int:category_item_id>/edit',
            methods=['GET', 'POST'])
 def editCategoryItem(category_id, category_item_id):
@@ -281,6 +288,7 @@ def editCategoryItem(category_id, category_item_id):
                                item=item_to_edit)
 
 
+# Delete a book item
 @app.route('/category/<int:category_id>/item/<int:category_item_id>/delete',
            methods=['GET', 'POST'])
 def deleteCategoryItem(category_id, category_item_id):
