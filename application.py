@@ -134,7 +134,7 @@ def gconnect():
     output += login_session['picture']
     output += ' "style = "width: 300px; height: 300px;border-radius: 150px; '
     output += '-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
-    flash("you are now logged in as %s" % login_session['username'])
+    flash("Logged in as %s" % login_session['username'])
     print("done!")
     return output
 
@@ -158,7 +158,7 @@ def getUserID(email):
     try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
-    except :
+    except:
         return None
 
 
@@ -308,6 +308,10 @@ def deleteCategoryItem(category_id, category_item_id):
     category = session.query(Category).filter_by(id=category_id).one()
     i = session.query(CategoryItem).filter_by(id=category_item_id).one()
     item_to_be_deleted = i
+    if item_to_be_deleted.user_id != login_session['user_id']:
+        return "<script>function myFunction() {alert('You are not authorized "\
+         "to delete this restaurant. Please create your own restaurant" \
+         "in order to delete.');}</script><body onload='myFunction()'>"
     if request.method == 'POST':
         session.delete(item_to_be_deleted)
         session.commit()
