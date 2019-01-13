@@ -158,7 +158,7 @@ def getUserID(email):
     try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
-    except exc.SQLAlchemyError:
+    except:
         return None
 
 
@@ -223,7 +223,12 @@ def showCategoryItems(category_id):
     category = session.query(Category).filter_by(id=category_id).one()
     i = session.query(CategoryItem).filter_by(category_id=category_id)
     category_items = i
-    return render_template('categoryitem.html', items=category_items,
+    if 'username' not in login_session:
+        return render_template('publiccategoryitem.html', category=category,
+                               items=category_items, category_id=category_id)
+    else:
+        # creator = session.query(User).filter_by(id=user.id).one()
+        return render_template('categoryitem.html', items=category_items,
                            category_id=category_id, category=category)
 
 
