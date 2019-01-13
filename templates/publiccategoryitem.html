@@ -1,0 +1,50 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+    <section class="jumbotron mt-5 text-center headJumbotron">
+        <div>
+            <h1 class="jumbotron-heading"><em>{{category.name}} Book(s)</em></h1>
+        </div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <p class="lead">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+        <a href="{{url_for('showCategories')}}">Back to Category List</a>
+    </section>
+
+    <div class="album py-5 bg-light"> 
+        <div class="container">
+            <div class="row">
+                {% for i in items %}
+                <div class="col-md-4">
+                   <div class="card mb-4 shadow-sm">
+                    <img class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" src="https://image.flaticon.com/icons/svg/167/167754.svg">
+                    <div class="card-body">
+                        <h2 class="card-text">
+                            <strong>{{i.title}}</strong>
+                        </h2>
+                        <h4 class="card-text text-muted">
+                            {{i.author}}
+                        </h4>
+                        <a href="{{url_for('categoryItemDescription', category_id=category.id, category_item_id=i.id)}}">Book Description</a>
+                        <div class="d-flex justify-content-between align-items-center">
+                        </div>
+                        <p>{{creator.name}}</p>
+                    </div>
+                   </div>        
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+    </div>
+    <div class="container">
+        <a href="{{url_for('showCategories')}}">Back to Category List</a>
+        <div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"               title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"              title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div> 
+    </div>
+
+{% endblock %}

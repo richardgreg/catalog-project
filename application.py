@@ -158,7 +158,7 @@ def getUserID(email):
     try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
-    except:
+    except sqlalchemy.exc.InvalidRequestError(*arg, **kw):
         return None
 
 
@@ -222,14 +222,19 @@ def showCategories():
 def showCategoryItems(category_id):
     category = session.query(Category).filter_by(id=category_id).one()
     i = session.query(CategoryItem).filter_by(category_id=category_id)
+    x = session.query(CategoryItem).filter_by(category_id=category_id).one()
     category_items = i
+    category_item = x
+    # creator = session.query(User).filter_by(id=category_item.id)
     if 'username' not in login_session:
+
         return render_template('publiccategoryitem.html', category=category,
-                               items=category_items, category_id=category_id)
+                               items=category_items, category_id=category_id,
+                               creator=creator)
     else:
-        # creator = session.query(User).filter_by(id=user.id).one()
+        creator = session.query(User).filter_by(id=category_item.id)
         return render_template('categoryitem.html', items=category_items,
-                           category_id=category_id, category=category)
+                               category_id=category_id, category=category)
 
 
 # Create a new category item
@@ -260,7 +265,7 @@ def categoryItemDescription(category_id, category_item_id):
     category = session.query(Category).filter_by(id=category_id).one()
     i = session.query(CategoryItem).filter_by(category_id=category_id)
     category_item = i.filter_by(id=category_item_id)
-
+    # creator = session.query(User).filter_by(id=category_item.user_id)
     return render_template('categoryiteminfo.html', category_id=category_id,
                            category_item_id=category_item_id,
                            cat_item=category_item,
