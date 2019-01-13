@@ -32,10 +32,13 @@
                         </h4>
                         <a href="{{url_for('categoryItemDescription', category_id=category.id, category_item_id=i.id)}}">Book Description</a>
                         <div class="d-flex justify-content-between align-items-center">
+                            {% if email == i.user_email %}
                             <div class="btn-group">
                                 <a class="btn btn-sm btn-outline-warning" href="{{url_for('editCategoryItem',category_id=category.id, category_item_id=i.id)}}">Edit Details</a>
                                 <a class="btn btn-sm btn-outline-danger" href="{{url_for('deleteCategoryItem',category_id=category.id, category_item_id=i.id)}}">Delete Book</a>
                             </div>
+                            {% endif %}
+                        <p>{{i.user_email}}</p>
                         </div>
                     </div>
                    </div>        

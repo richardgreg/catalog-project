@@ -158,7 +158,7 @@ def getUserID(email):
     try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
-    except sqlalchemy.exc.InvalidRequestError(*arg, **kw):
+    except :
         return None
 
 
@@ -222,19 +222,19 @@ def showCategories():
 def showCategoryItems(category_id):
     category = session.query(Category).filter_by(id=category_id).one()
     i = session.query(CategoryItem).filter_by(category_id=category_id)
-    x = session.query(CategoryItem).filter_by(category_id=category_id).one()
+    # x = session.query(CategoryItem).filter_by(category_id=category_id).one()
     category_items = i
-    category_item = x
+    # category_item = x
     # creator = session.query(User).filter_by(id=category_item.id)
     if 'username' not in login_session:
 
         return render_template('publiccategoryitem.html', category=category,
-                               items=category_items, category_id=category_id,
-                               creator=creator)
+                               items=category_items, category_id=category_id)
     else:
-        creator = session.query(User).filter_by(id=category_item.id)
+        # creator = session.query(User).filter_by(id=category_item.id)
         return render_template('categoryitem.html', items=category_items,
-                               category_id=category_id, category=category)
+                               category_id=category_id, category=category,
+                               email=login_session['email'])
 
 
 # Create a new category item
@@ -249,7 +249,8 @@ def newCategoryItem(category_id):
                                 description=request.form['description'],
                                 author=request.form['author'],
                                 category_id=category_id,
-                                user_id=login_session['user_id'])
+                                user_id=login_session['user_id'],
+                                user_email=login_session['email'])
         session.add(new_item)
         session.commit()
         flash("New catalog item successfully addded!!!")

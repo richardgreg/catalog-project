@@ -35,6 +35,7 @@ class CategoryItem(Base):
     category_id = Column(Integer, ForeignKey('category.id'))
     category = relationship(Category)
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    user_email = Column(String, nullable=False)
     user = relationship(User)
 
     @property
