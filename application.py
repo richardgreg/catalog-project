@@ -19,6 +19,8 @@ import json
 from flask import make_response
 import requests
 
+from functools import wraps
+
 
 app = Flask(__name__)
 
@@ -158,8 +160,19 @@ def getUserID(email):
     try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
-    except:
+    except ImportError:
         return None
+
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'username' in login_session:
+            return f(*args, **kwargs)
+        else:
+            flash("You are not allowed to access there")
+            return redirect('/login')
+    return decorated_function
 
 
 # DISCONNECT - Revoke a current user's token and reset their login_session
@@ -276,11 +289,15 @@ def categoryItemDescription(category_id, category_item_id):
 # Edit a specific BOOK item
 @app.route('/category/<int:category_id>/item/<int:category_item_id>/edit',
            methods=['GET', 'POST'])
+@login_required
 def editCategoryItem(category_id, category_item_id):
-    if "username" not in login_session:
-        return redirect('/login')
-    i = session.query(CategoryItem).filter_by(id=category_item_id).one()
+    i = session.query(CategoryItem).filter_by(id=category_item_id).one_or_none()
     item_to_edit = i
+    # Java script Authorization code
+    if item_to_edit.user_id != login_session['user_id']:
+        return "<script>function myFunction() {alert('You are not authorized "\
+         "to delete this restaurant. Please create your own restaurant" \
+         "in order to delete.');}</script><body onload='myFunction()'>"
     if request.method == 'POST':
         if request.form['title']:
             item_to_edit.title = request.form['title']
@@ -302,12 +319,12 @@ def editCategoryItem(category_id, category_item_id):
 # Delete a book item
 @app.route('/category/<int:category_id>/item/<int:category_item_id>/delete',
            methods=['GET', 'POST'])
+@login_required
 def deleteCategoryItem(category_id, category_item_id):
-    if "username" not in login_session:
-        return redirect('/login')
     category = session.query(Category).filter_by(id=category_id).one()
     i = session.query(CategoryItem).filter_by(id=category_item_id).one()
     item_to_be_deleted = i
+    # Java script Authorization code
     if item_to_be_deleted.user_id != login_session['user_id']:
         return "<script>function myFunction() {alert('You are not authorized "\
          "to delete this restaurant. Please create your own restaurant" \
