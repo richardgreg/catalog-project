@@ -234,10 +234,10 @@ def showCategories():
 @app.route('/category/<int:category_id>/item/')
 def showCategoryItems(category_id):
     category = session.query(Category).filter_by(id=category_id).one()
-    i = session.query(CategoryItem).filter_by(category_id=category_id)
-    # x = session.query(CategoryItem).filter_by(category_id=category_id).one()
-    category_items = i
-    # category_item = x
+    category_items = session.query(CategoryItem).\
+        filter_by(category_id=category_id)
+    # category_item = session.query(CategoryItem).\
+    # filter_by(category_id=category_id).one()
     # creator = session.query(User).filter_by(id=category_item.id)
     if 'username' not in login_session:
 
@@ -277,8 +277,8 @@ def newCategoryItem(category_id):
 @app.route('/category/<int:category_id>/item/<int:category_item_id>/')
 def categoryItemDescription(category_id, category_item_id):
     category = session.query(Category).filter_by(id=category_id).one()
-    i = session.query(CategoryItem).filter_by(category_id=category_id)
-    category_item = i.filter_by(id=category_item_id)
+    category_item = session.query(CategoryItem).\
+        filter_by(category_id=category_id).filter_by(id=category_item_id)
     # creator = session.query(User).filter_by(id=category_item.user_id)
     return render_template('categoryiteminfo.html', category_id=category_id,
                            category_item_id=category_item_id,
@@ -291,8 +291,8 @@ def categoryItemDescription(category_id, category_item_id):
            methods=['GET', 'POST'])
 @login_required
 def editCategoryItem(category_id, category_item_id):
-    i = session.query(CategoryItem).filter_by(id=category_item_id).one_or_none()
-    item_to_edit = i
+    item_to_edit = session.query(CategoryItem).\
+        filter_by(id=category_item_id).one_or_none()
     # Java script Authorization code
     if item_to_edit.user_id != login_session['user_id']:
         return "<script>function myFunction() {alert('You are not authorized "\
@@ -322,8 +322,8 @@ def editCategoryItem(category_id, category_item_id):
 @login_required
 def deleteCategoryItem(category_id, category_item_id):
     category = session.query(Category).filter_by(id=category_id).one()
-    i = session.query(CategoryItem).filter_by(id=category_item_id).one()
-    item_to_be_deleted = i
+    item_to_be_deleted = session.query(CategoryItem).\
+        filter_by(id=category_item_id).one()
     # Java script Authorization code
     if item_to_be_deleted.user_id != login_session['user_id']:
         return "<script>function myFunction() {alert('You are not authorized "\
