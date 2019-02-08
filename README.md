@@ -87,9 +87,10 @@ directory, via your terminal:
 
 :smile:
 
-## Incoming improvements
+## Incoming Improvements
 - Structure the Flask app in a way that allows scalability.
 - Run software packages with Docker instead of Vagrant since the former is more
 light-weight.
 - Use the `flask-restful` library to build scalable API endpoints.
 - Give users an option to add/upload images for book items.
+- More OAuth providers to expand userbase.
