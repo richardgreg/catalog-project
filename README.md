@@ -12,7 +12,7 @@ Modern web applications perform a variety of functions and provide amazing
 features and utilities to their users; but deep down, it’s really all just 
 creating, reading, updating and deleting data.
 
-I am a avid reader. I enjoyed reading mytholgy books as a child. 
+I am a avid reader. I enjoyed reading classical books books as a child. My favorite genre was _Mythology._
 
 ### What is needed:
 You'll run these program using a Unix-style terminal on your computer; the
@@ -86,3 +86,10 @@ directory, via your terminal:
 - Third, enter `python3 application.py`
 
 :smile:
+
+## Incoming improvements
+- Structure the Flask app in a way that allows scalability.
+- Run software packages with Docker instead of Vagrant since the former is more
+light-weight.
+- Use the `flask-restful` library to build scalable API endpoints.
+- Give users an option to add/upload images for book items.
