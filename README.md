@@ -5,7 +5,10 @@
 This is a **RESTful** web application, using the Python framework **Flask,**
 that provides a list of items (books) within a variety of _categories_ (genres)
 as well as provide a user registration and authentication system. Registered 
-users will have the ability to **post,** **edit** and **delete** their own items. 
+users will have the ability to **post,** **edit** and **delete** their own items.
+
+> '/' or '/categories' - Homepage displaying categories and successful login.
+![Homepage](https://github.com/richardgreg/catalog-project/blob/master/assets/successfull-loggin.png)
 
 ### Why this project and specifically a book catalog?
 Modern web applications perform a variety of functions and provide amazing 
@@ -13,6 +16,24 @@ features and utilities to their users; but deep down, it’s really all just
 creating, reading, updating and deleting data.
 I am a avid reader. I enjoyed reading classical books as a child. My favorite
 genre was _Mythology._
+
+> '/category/<int:category_id>/item/' - Route displaying items relative to a category.
+![Display Category Items](https://github.com/richardgreg/catalog-project/blob/master/assets/item-display2.png)
+
+> '/category/<int:category_id>/item/<int:category_item_id>/' - A single book
+item description.
+![Category Item Description](https://github.com/richardgreg/catalog-project/blob/master/assets/item-description.png)
+
+> '/category/<int:category_id>/item/new/' - Form to add a new book. User must
+be logged in.
+![Add Form](https://github.com/richardgreg/catalog-project/blob/master/assets/add-form.png)
+
+> '/category/<int:category_id>/item/<int:category_item_id>/edit' - Edit book
+item. Edit is restricted to owner of item.
+![Edit Form](https://github.com/richardgreg/catalog-project/blob/master/assets/edit-item.png)
+
+> '/category/<int:category_id>/item/<int:category_item_id>/delete' - Delete item.
+![Delete Item](https://github.com/richardgreg/catalog-project/blob/master/assets/delete-item.png)
 
 ### What is needed:
 You'll run these program using a Unix-style terminal on your computer; the
@@ -85,7 +106,7 @@ While in the the _project_ directory, via your terminal:
 - Secondly, enter `python3 install_categories.py`
 - Finally, enter `python3 application.py`
 
-:smile:
+:expressionless:
 
 ## Incoming Improvements
 - Structure the Flask app in a way that allows scalability.
