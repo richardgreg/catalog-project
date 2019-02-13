@@ -7,7 +7,7 @@ that provides a list of items (books) within a variety of _categories_ (genres)
 as well as provide a user registration and authentication system. Registered 
 users will have the ability to **post,** **edit** and **delete** their own items.
 
-> '/' or '/categories' - Homepage displaying categories and successful login.
+`'/' or '/categories'` - Homepage displaying categories and successful login.
 ![Homepage](https://github.com/richardgreg/catalog-project/blob/master/assets/successfull-loggin.png)
 
 ### Why this project and specifically a book catalog?
@@ -17,22 +17,22 @@ creating, reading, updating and deleting data.
 I am a avid reader. I enjoyed reading classical books as a child. My favorite
 genre was _Mythology._
 
-> '/category/<int:category_id>/item/' - Route displaying items relative to a category.
+`'/category/<int:category_id>/item/'` - Route displaying items relative to a category.
 ![Display Category Items](https://github.com/richardgreg/catalog-project/blob/master/assets/item-display2.png)
 
-> '/category/<int:category_id>/item/<int:category_item_id>/' - A single book
+`'/category/<int:category_id>/item/<int:category_item_id>/'` - A single book
 item description.
 ![Category Item Description](https://github.com/richardgreg/catalog-project/blob/master/assets/item-description.png)
 
-> '/category/<int:category_id>/item/new/' - Form to add a new book. User must
+`'/category/<int:category_id>/item/new/'` - Form to add a new book. User must
 be logged in.
 ![Add Form](https://github.com/richardgreg/catalog-project/blob/master/assets/add-form.png)
 
-> '/category/<int:category_id>/item/<int:category_item_id>/edit' - Edit book
+`'/category/<int:category_id>/item/<int:category_item_id>/edit'` - Edit book
 item. Edit is restricted to owner of item.
 ![Edit Form](https://github.com/richardgreg/catalog-project/blob/master/assets/edit-item.png)
 
-> '/category/<int:category_id>/item/<int:category_item_id>/delete' - Delete item.
+`'/category/<int:category_id>/item/<int:category_item_id>/delete'` - Delete item.
 ![Delete Item](https://github.com/richardgreg/catalog-project/blob/master/assets/delete-item.png)
 
 ### What is needed:
@@ -91,8 +91,28 @@ _client ID_ and _client secrets_.
 **Make sure you do this after the above steps have been completed. If you do
 it before, the origins and authorized uris may not appear in the JSON file.**
 - Rename the JSON file as **_client_secrets.json_**. You can delete the dummy
-_public_client_secrets.json_ file that comes with the _catalog-project._ And
-you're good to go for the authentication and authorization.
+_public_client_secrets.json_ file that comes with the _catalog-project._
+
+Open the _login.html_ template in _/template_ directory with your favorite
+text editor.
+``` html
+<!-- GOOGLE PLUS SIGN IN BUTTON-->
+
+          
+          <div id="signinButton">
+          <span class="g-signin"
+            data-scope="openid email"
+            data-clientid="CLIENT-ID"
+            data-redirecturi="postmessage"
+            data-accesstype="offline"
+            data-cookiepolicy="single_host_origin"
+            data-callback="signInCallback"
+            data-approvalprompt="force">
+          </span>
+        </div>
+```
+Copy your google app _cliend ID._ and replace `CLIENT-ID`.
+And you're good to go for the authentication and authorization.
 
 Files in the VM's _/vagrant_ directory are shared with the vagrant folder on
 your computer. But other data inside the VM is not. For instance the project
