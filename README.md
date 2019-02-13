@@ -128,7 +128,7 @@ While in the the _project_ directory, via your terminal:
 
 :expressionless:
 
-## Incoming Improvements
+### Likely Improvements
 - Structure the Flask app in a way that allows scalability.
 - Run software packages with Docker instead of Vagrant since the former is more
 light-weight.
