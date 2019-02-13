@@ -111,7 +111,7 @@ text editor.
           </span>
         </div>
 ```
-Copy your google app _cliend ID._ and replace `CLIENT-ID`.
+Copy your google OAuth _cliend ID._ and replace `CLIENT-ID`.
 And you're good to go for the authentication and authorization.
 
 Files in the VM's _/vagrant_ directory are shared with the vagrant folder on
