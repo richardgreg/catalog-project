@@ -11,8 +11,8 @@ users will have the ability to **post,** **edit** and **delete** their own items
 Modern web applications perform a variety of functions and provide amazing 
 features and utilities to their users; but deep down, it’s really all just 
 creating, reading, updating and deleting data.
-
-I am a avid reader. I enjoyed reading classical books books as a child. My favorite genre was _Mythology._
+I am a avid reader. I enjoyed reading classical books as a child. My favorite
+genre was _Mythology._
 
 ### What is needed:
 You'll run these program using a Unix-style terminal on your computer; the
@@ -35,7 +35,8 @@ to a reported bug, installing VirtualBox from the site may uninstall other
 software you need.
 - Download and Install [vagrant](https://www.vagrantup.com/downloads.html). 
 You can check if vagrant is installed by running `vagrant --version`
-- Download the [VM configuration](https://s3.amazonaws.com/video.udacity-data.com/topher/2018/April/5acfbfa3_fsnd-virtual-machine/fsnd-virtual-machine.zip). Unzip the file. Using the terminal, navigate into the vagrant subdirectory.
+- Download the [VM configuration](https://s3.amazonaws.com/video.udacity-data.com/topher/2018/April/5acfbfa3_fsnd-virtual-machine/fsnd-virtual-machine.zip).
+Unzip the file. Using the terminal, navigate into the vagrant subdirectory.
 - Clone the **_catalog-project_** and move it into the
 _/FSND-Virtual-Machine/vagrant/_ subdirectory. This particular step can
 actually be done at any point in time, but to avoid any confusion, do this.
@@ -78,12 +79,11 @@ dependencies **are not**. You can `cd` into the _/catalog-project_ directory
 (or whatever you named it when cloning).
 
 ### How to run app
-And for the moment you've been waiting for, while in the the _project_
-directory, via your terminal:
+While in the the _project_ directory, via your terminal:
 
 - First, enter the command `python3 database_setup.py`
-- Second, enter `python3 install_categories.py`
-- Third, enter `python3 application.py`
+- Secondly, enter `python3 install_categories.py`
+- Finally, enter `python3 application.py`
 
 :smile:
 
