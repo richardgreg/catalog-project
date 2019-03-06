@@ -87,7 +87,7 @@ While in the the _project_ directory, via your terminal:
 
 :smile:
 
-## Incoming Improvements
+## Possible Improvements
 - Structure the Flask app in a way that allows scalability.
 - Run software packages with Docker instead of Vagrant since the former is more
 light-weight.
