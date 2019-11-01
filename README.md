@@ -3,8 +3,8 @@
 ## About
 
 This is a **RESTful** web application, using the Python framework **Flask,**
-that provides a list of items (books) within a variety of _categories_ (genres)
-as well as provide a user registration and authentication system. Registered 
+which provides a list of items (books) within a variety of _categories_ (genres)
+as well as provides user registration and authentication system. Registered 
 users will have the ability to **post,** **edit** and **delete** their own items.
 
 `'/' or '/categories'` - Homepage displaying categories and successful login.
